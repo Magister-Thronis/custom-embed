@@ -1,5 +1,4 @@
 const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
-const bot = require("../../deps/bot");
 
 module.exports = {
   id: "CEimage",
@@ -16,7 +15,6 @@ module.exports = {
     const rows = interaction.message.components;
 
     // utilities
-    const icons = bot.icons;
     const error = client.tools.error;
 
     const imageEmbed = new EmbedBuilder().setColor("F4D58D").setAuthor({
@@ -26,8 +24,8 @@ module.exports = {
         size: 512,
       }),
     }).setDescription(`
-      ${icons.text5} **to Set:** \`Send a [DIRECT] image link in chat\`
-      ${icons.text5} **or:** \`Upload any JPG / PNG file\`
+      **to Set:** \`Send a [DIRECT] image link in chat\`
+      **or:** \`Upload any JPG / PNG file\`
       `);
 
     interaction.message.edit({ embeds: [imageEmbed, embeds[1]] });

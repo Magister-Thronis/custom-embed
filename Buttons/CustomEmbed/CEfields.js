@@ -1,6 +1,5 @@
 const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const { Promise } = require("mongoose");
-const bot = require("../../deps/bot");
 
 module.exports = {
   id: "CEfields",
@@ -17,9 +16,7 @@ module.exports = {
     const rows = interaction.message.components;
 
     // utilities
-    const icons = bot.icons;
     const error = client.tools.error;
-    const remaining = 6000 - embeds[1].length;
 
     let modifying = "name";
     let newField = { name: "\u200b", value: "\u200b" };
@@ -28,9 +25,9 @@ module.exports = {
       .setColor("F4D58D")
       .setDescription(
         `
-    ${icons.text5} **use the buttons below to set the field data**
-    ${icons.text5} **once done use the \`set\` button**
-    ${icons.text5} **clicking the \`set\` button without setting a name/value with insert a blank {character}**
+    **use the buttons below to set the field data**
+    **once done use the \`set\` button**
+    **clicking the \`set\` button without setting a name/value with insert a blank {character}**
     `
       )
       .addFields(

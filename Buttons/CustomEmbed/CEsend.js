@@ -1,5 +1,4 @@
 const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
-const bot = require("../../deps/bot");
 const db = require("../../schemas/embed");
 
 module.exports = {
@@ -16,7 +15,6 @@ module.exports = {
     const rows = interaction.message.components;
 
     // utilities
-    const icons = bot.icons;
     const error = client.tools.error;
 
     // find doc

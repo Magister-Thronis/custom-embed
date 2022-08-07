@@ -1,5 +1,4 @@
 const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
-const bot = require("../../deps/bot");
 
 module.exports = {
   id: "CEauthor",
@@ -16,7 +15,6 @@ module.exports = {
     const rows = interaction.message.components;
 
     // utilities
-    const icons = bot.icons;
     const error = client.tools.error;
 
     const authorEmbed = new EmbedBuilder().setColor("F4D58D").setAuthor({
@@ -26,7 +24,7 @@ module.exports = {
         size: 512,
       }),
     }).setDescription(`
-      ${icons.text5} **to Set:** \`tag a user\`
+      **to Set:** \`tag a user\`
       `);
 
     interaction.message.edit({

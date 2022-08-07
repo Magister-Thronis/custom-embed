@@ -1,5 +1,4 @@
 const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
-const bot = require("../../deps/bot");
 
 module.exports = {
   id: "CEfields_delete",
@@ -16,9 +15,7 @@ module.exports = {
     const rows = interaction.message.components;
 
     // utilities
-    const icons = bot.icons;
     const error = client.tools.error;
-    const remaining = 6000 - embeds[1].length;
 
     let num = 0;
 
@@ -43,8 +40,8 @@ module.exports = {
         size: 512,
       }),
     }).setDescription(`
-      ${icons.text5} **to Delete:** \`type index number in chat"\`
-      ${icons.text5} **to End:** \`type "stop"\`
+      **to Delete:** \`type index number in chat"\`
+      **to End:** \`type "stop"\`
       `);
 
     const filter = (m) => m.author.id === interaction.user.id;

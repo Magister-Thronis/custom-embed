@@ -1,5 +1,4 @@
 const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
-const bot = require("../../deps/bot");
 
 module.exports = {
   id: "CEurl",
@@ -16,7 +15,6 @@ module.exports = {
     const rows = interaction.message.components;
 
     // utilities
-    const icons = bot.icons;
     const error = client.tools.error;
     const remaining = 6000 - embeds[1].length;
 
@@ -27,7 +25,7 @@ module.exports = {
         size: 512,
       }),
     }).setDescription(`
-      ${icons.text5} **to Set:** \`send a message in chat\`
+      **to Set:** \`send a message in chat\`
       `);
 
     interaction.message.edit({ embeds: [urlEmbed, embeds[1]] });

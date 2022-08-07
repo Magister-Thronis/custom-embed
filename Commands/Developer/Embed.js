@@ -7,7 +7,6 @@ const {
   ButtonStyle,
   PermissionFlagsBits,
 } = require("discord.js");
-const bot = require("../../deps/bot");
 const db = require("../../schemas/embed");
 
 function fetch(channel, msg) {
@@ -125,7 +124,6 @@ module.exports = {
     const messageChannel = interaction.options.getChannel("channel");
     let interactionMessage = null;
 
-    const icons = bot.icons;
     const error = client.tools.error;
     const uid = user.id;
 
@@ -187,7 +185,7 @@ module.exports = {
       })
       .setDescription(
         `
-      ${icons.text5} **Use buttons to create a customized embed**
+      **Use buttons to create a customized embed**
       ㅤ
       `
       )
@@ -284,8 +282,8 @@ module.exports = {
           const infoEmbed = {
             type: "rich",
             description: `
-            ${icons.text5}**category:** \`${categoryNameToUse}\`
-            ${icons.text5}**name:** \`${template.name}\`
+            **category:** \`${categoryNameToUse}\`
+            **name:** \`${template.name}\`
             `,
             color: 10154743,
             author: {
