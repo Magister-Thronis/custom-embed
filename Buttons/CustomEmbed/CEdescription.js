@@ -15,7 +15,6 @@ module.exports = {
     const rows = interaction.message.components;
 
     // utilities
-    const icons = bot.icons;
     const error = client.tools.error;
     const remaining = 6000 - embeds[1].length;
 
