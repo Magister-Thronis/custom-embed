@@ -9,6 +9,6 @@ create customised embeds using buttons in DJS v14.
 
 - edit embeds already sent
 
-- save created embeds in a database.
+- save created embeds in a database with custom categories and titles
 
 - use embeds saved in the database as a template for new embeds.
