@@ -25,7 +25,6 @@ module.exports = {
       }),
     }).setDescription(`
       **to Set:** \`Send a [DIRECT] image link in chat\`
-      **or:** \`Upload any JPG / PNG file\`
       `);
 
     interaction.message.edit({ embeds: [imageEmbed, embeds[1]] });
@@ -66,13 +65,7 @@ module.exports = {
     collector.on("collect", (m) => {
       let image = "";
 
-      if (m.attachments.size > 0) {
-        if (m.attachments.first().name.endsWith(".jpg") || m.attachments.first().name.endsWith(".png")) {
-          image = m.attachments.first().url;
-        }
-      } else {
-        image = m.content;
-      }
+      image = m.content;
 
       // cheack if image is valid picture
       if (!image.includes("http")) return error(interaction, "Invalid image link", m);
