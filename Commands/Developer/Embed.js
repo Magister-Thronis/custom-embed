@@ -254,6 +254,9 @@ module.exports = {
         break;
 
       case "select_from_template": // use a stored embed as a template
+        if (userObject.interactionChannel || userObject.interactionMessage) {
+          return error(interaction, "You already have an embed in progress");
+        }
         const categoryNameToUse = interaction.options.getString("category");
         userObject.sendChannel = messageChannel.id;
         userObject.sendMessage = message || "";
@@ -378,13 +381,22 @@ module.exports = {
           }
           if (btnInt.customId === "delete_embed") {
             embeds.splice(pages[id], 1);
-            data.templates.splice(pages[id], 1);
+            data.categories[categoryIndex].templates.splice(pages[id], 1);
+            data.markModified("categories");
             data.save();
-            interaction.followUp({ content: "Embed deleted", ephemeral: true });
-            interaction.editReply({
-              embeds: [embeds[0]],
-              components: [getRow(id)],
-            });
+            interaction.followUp({ content: `Deleted template`, ephemeral: true });
+            if (data.categories[categoryIndex].templates.length < 1) {
+              interaction.editReply({
+                content: `you have no more templates in this category`,
+                embeds: [],
+                components: [],
+              });
+            } else {
+              interaction.editReply({
+                embeds: [embeds[0]],
+                components: [getRow(id)],
+              });
+            }
           }
 
           if (btnInt.customId === "select_embed") {
