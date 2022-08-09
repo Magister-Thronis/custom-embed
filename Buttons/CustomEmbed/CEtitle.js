@@ -1,32 +1,20 @@
 const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const bot = require("../../deps/bot");
 
 module.exports = {
   id: "CEtitle",
-  permission: PermissionFlagsBits.Administrator,
+  permission: PermissionFlagsBits.ManageMessages,
 
   async execute(interaction, client) {
-    const { guild } = interaction;
-
     // embeds
     const embeds = interaction.message.embeds;
     let modifiedEmbed = embeds[1];
-
-    //components
-    const rows = interaction.message.components;
 
     // utilities
     const error = client.tools.error;
     const remaining = 6000 - embeds[1].length;
 
-    const titleEmbed = new EmbedBuilder().setColor("F4D58D").setAuthor({
-      name: `${guild.name} | Editing title`,
-      iconURL: guild.iconURL({
-        dynamic: true,
-        size: 512,
-      }),
-    }).setDescription(`
-      **to Set:** \`send a message in chat\`
-      `);
+    const titleEmbed = client.tools.embeds.titleEmbed;
 
     interaction.message.edit({ embeds: [titleEmbed, embeds[1]] });
 
@@ -38,30 +26,7 @@ module.exports = {
       filter,
     });
 
-    // util buttons
-    const buttonRow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder().setCustomId("cancel").setStyle(ButtonStyle.Secondary).setLabel("cancel")
-    );
-
-    const buttonFilter = (u) => u.user.id === interaction.user.id;
-    buttonCollector = interaction.message.createMessageComponentCollector({
-      filter: buttonFilter,
-    });
-
-    interaction.message.edit({
-      components: [buttonRow],
-    });
-
-    buttonCollector.on("collect", (btnInt) => {
-      if (btnInt.component.customId === "cancel") {
-        btnInt
-          .reply({ embeds: [new EmbedBuilder().setColor("F4D58D").setDescription("**Canceled**")] })
-          .then(() => setTimeout(() => btnInt.deleteReply(), 1000));
-
-        buttonCollector.stop();
-        collector.stop();
-      }
-    });
+    client.tools.buttons(client, interaction, collector);
 
     collector.on("collect", (m) => {
       if (m.content.length >= 256) {
@@ -81,15 +46,6 @@ module.exports = {
           embeds: [titleEmbed, modifiedEmbed],
         })
         .then(() => setTimeout(() => m.delete(), 1000));
-    });
-    collector.on("end", () => {
-      interaction.message
-        .edit({
-          embeds: [embeds[0], modifiedEmbed],
-          components: rows,
-        })
-        .then(interaction.deleteReply());
-      return;
     });
   },
 };

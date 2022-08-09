@@ -3,7 +3,7 @@ const { Promise } = require("mongoose");
 
 module.exports = {
   id: "CEfields",
-  permission: PermissionFlagsBits.Administrator,
+  permission: PermissionFlagsBits.ManageMessages,
 
   async execute(interaction, client) {
     const { guild } = interaction;
@@ -22,26 +22,20 @@ module.exports = {
     let newField = { name: "\u200b", value: "\u200b" };
 
     let fieldEmbed = new EmbedBuilder()
+      .setTitle(` Editing fields`)
       .setColor("F4D58D")
       .setDescription(
         `
-    **use the buttons below to set the field data**
-    **once done use the \`set\` button**
-    **clicking the \`set\` button without setting a name/value with insert a blank {character}**
+     **use the buttons below to set the field data**
+     **once done use the \`set\` button**
+     **clicking the \`set\` button without setting a name/value with insert a blank {character}**
     `
       )
       .addFields(
         { name: `name`, value: `\u200b`, inline: false },
         { name: `value`, value: `\u200b`, inline: false },
         { name: `inline`, value: `\u200b`, inline: false }
-      )
-      .setAuthor({
-        name: `${guild.name} | Editing fields`,
-        iconURL: guild.iconURL({
-          dynamic: true,
-          size: 512,
-        }),
-      });
+      );
 
     interaction.message.edit({
       embeds: [fieldEmbed, embeds[1]],
@@ -78,9 +72,7 @@ module.exports = {
       let fields = fieldEmbed.data.fields;
 
       if (btnInt.component.customId === "cancel") {
-        btnInt
-          .reply({ embeds: [new EmbedBuilder().setColor("F4D58D").setDescription("**Canceled**")] })
-          .then(() => setTimeout(() => btnInt.deleteReply(), 1000));
+        btnInt.deferUpdate();
 
         buttonCollector.stop();
         collector.stop();
@@ -136,7 +128,7 @@ module.exports = {
 
         // check length of fields is greater  than 25
 
-        if (fields.length >= 2) {
+        if (fields.length >= 25) {
           return interaction.editReply({
             embeds: [
               EmbedBuilder.from(msgEmbed)

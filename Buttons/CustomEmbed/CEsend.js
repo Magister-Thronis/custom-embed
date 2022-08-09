@@ -1,9 +1,10 @@
 const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const bot = require("../../deps/bot");
 const db = require("../../schemas/embed");
 
 module.exports = {
   id: "CEsend",
-  permission: PermissionFlagsBits.Administrator,
+  permission: PermissionFlagsBits.ManageMessages,
 
   async execute(interaction, client) {
     const { guild, user } = interaction;
@@ -15,6 +16,7 @@ module.exports = {
     const rows = interaction.message.components;
 
     // utilities
+    const icons = bot.icons;
     const error = client.tools.error;
 
     // find doc

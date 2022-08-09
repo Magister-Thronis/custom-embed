@@ -3,7 +3,7 @@ const db = require("../../schemas/embed");
 
 module.exports = {
   id: "CEcancel",
-  permission: PermissionFlagsBits.Administrator,
+  permission: PermissionFlagsBits.ManageMessages,
 
   async execute(interaction, client) {
     const { guild, user } = interaction;
@@ -23,7 +23,7 @@ module.exports = {
     await data.save();
 
     // delete the message
-    interaction.reply({ content: "cancelled", ephemeral: true }).then(() => {
+    await interaction.reply({ content: "cancelled", ephemeral: true }).then(() => {
       interaction.message.delete();
     });
   },
