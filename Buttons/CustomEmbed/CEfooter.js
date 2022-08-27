@@ -1,4 +1,4 @@
-const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits} = require("discord.js");
 
 module.exports = {
   id: "CEfooter",
