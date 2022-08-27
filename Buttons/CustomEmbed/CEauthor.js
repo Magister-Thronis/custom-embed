@@ -1,5 +1,4 @@
-const { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
-const bot = require("../../deps/bot");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   id: "CEauthor",

@@ -15,6 +15,7 @@ client.tools = require(`./util/Tools`);
 client.config = require("./config.json");
 client.commands = new Collection();
 client.buttons = new Collection();
+client.events = new Collection();
 
 client
   .login(client.config.token)
